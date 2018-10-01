@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2018_10_01_103006) do
     t.text "description"
     t.string "overall_goal"
     t.datetime "due_date"
+    t.datetime "start_date"
     t.string "daily_goal"
     t.integer "category_id"
     t.integer "user_id"
