@@ -41,7 +41,7 @@ class User < ApplicationRecord
   end
 
   def self.most_consistent
-    User.all.max_by(&:percent_daily_goals_met)
+    User.all.max_by(&:percent_daily_goal_mets)
   end
 
   def self.most_popular
@@ -69,14 +69,14 @@ class User < ApplicationRecord
     goals.select { |goal| goal.achieved == true }
   end
 
-  def daily_goals_met
+  def daily_goal_mets
     # needs to check interaction with goals
-    goals.map(&:daily_goals_met).inject(0, :+)
+    goals.map(&:daily_goal_mets).inject(0, :+)
   end
 
-  def percent_daily_goals_met
+  def percent_daily_goal_mets
     # needs to check interaction with goals
-    goals.map(&:percent_daily_goals_met).inject(0, :+).to_f / goals.count
+    goals.map(&:percent_daily_goal_mets).inject(0, :+).to_f / goals.count
   end
 
   def num_unique_commenters

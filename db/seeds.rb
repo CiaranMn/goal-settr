@@ -9,7 +9,7 @@ financial = Category.create(name: "Financial", description: "Saving, investing, 
 
 k_goal1 = Goal.create(name: "Learn Rails", user_id: 2, description: "Learning rails is fun and useful.", overall_goal: "Rails Master", due_date: Date.parse('07/12/2018'), daily_goal: "Do 5 labs", category: education)
 
-c_goal = Goal.create(name: "Learn Piano", user_id: 1, description: "Learning piano is fun and useful.", overall_goal: "Grade 6 Piano", due_date: Date.parse('31/03/2019'), daily_goal: "30 minutes practice", category: music)
+c_goal = Goal.create(name: "Learn Piano", user_id: 1, description: "Learning piano is fun and useful.", overall_goal: "Grade 6 Piano", due_date: Date.parse("31/03/2019"), daily_goal: "30 minutes practice", category: music)
 
 c_goal2 = Goal.create(name: "Learn Javascript", user_id: 1, description: "Getting ready for mod 3", daily_goal: "30 minutes javascript learning", category: education)
 
