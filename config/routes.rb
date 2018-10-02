@@ -1,15 +1,11 @@
 Rails.application.routes.draw do
 
-  devise_for :users do
-    get '/users/sign_out' => 'devise/sessions#destroy'
-  end
-  
-  resources :goals
+  devise_for :users
   resources :users, only: [:index, :show]
 
+  resources :goals
+
   root 'home#index'
-
-
 
 
 end

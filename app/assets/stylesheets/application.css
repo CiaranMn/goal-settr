@@ -1,3 +1,5 @@
+/* The following deals with the fixed navigation header bar */
+
 header {
   position: fixed;
   top: 0;
@@ -62,15 +64,29 @@ header li {
   list-style: none;
 }
 
+/* The following deals with the body text and form elements */
+
 body {
-  padding-top: 80px;
+  padding-top: 90px;
   padding-left: 20px;
   font-family: Arial, sans-serif;
   color: teal;
 }
 
+td {
+  font-size: 1.2em;
+  border-bottom: 1px solid teal;
+  padding: 10px;
+  min-width: 120px;
+  text-align: center;
+}
+
+tr:hover {
+  background-color: rgb(213, 237, 226);
+}
+
 h1 {
-  font-size: 2em;
+  font-size: 1.8em;
 }
 
 form {
@@ -84,8 +100,14 @@ input {
 }
 
 input[type="submit"] {
-    width: 80px;
-    height: 60px;
-    font-size: 1em;
-    margin: 10px 0px;
+  width: 80px;
+  height: 60px;
+  font-size: 1em;
+  margin: 10px 0px;
+}
+
+/* For styling flash messages  */
+
+div[id^="flash"] {
+  color: rgb(221, 28, 28);
 }

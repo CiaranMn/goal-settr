@@ -1,17 +1,17 @@
-ciaran = User.create(name: "Ciaran")
-kay = User.create(name: "Kay")
-dan = User.create(name: "Dan")
-ed = User.create(name: "Ed")
+ciaran = User.create!(name: "Ciaran", email: "blah@blah.com", password: 'secret', password_confirmation: 'secret')
+kay = User.create!(name: "Kay", email: "blah2@blah.com", password: 'secret', password_confirmation: 'secret')
+dan = User.create!(name: "Dan", email: "blah3@blah.com", password: 'secret', password_confirmation: 'secret')
+ed = User.create!(name: "Ed", email: "blah4@blah.com", password: 'secret', password_confirmation: 'secret')
 
 education = Category.create(name: "Education", description: "Learning for the betterment of oneself")
 music = Category.create(name: "Music", description: "Anything to do with learning music")
 financial = Category.create(name: "Financial", description: "Saving, investing, budgeting, and anythings else financial")
 
-k_goal1 = Goal.create(name: "Learn Rails", user_id: 2, description: "Learning rails is fun and useful.", overall_goal: "Rails Master", due_date: Date.parse('07/12/2018'), daily_goal: "Do 5 labs", category: education)
+k_goal1 = Goal.create(name: "Learn Rails", user_id: 2, description: "Learning rails is fun and useful.", overall_goal: "Rails Master", due_date: Date.parse('07/12/2018'), start_date: Date.parse("17/09/2018"), daily_goal: "Do 5 labs", category: education)
 
-c_goal = Goal.create(name: "Learn Piano", user_id: 1, description: "Learning piano is fun and useful.", overall_goal: "Grade 6 Piano", due_date: Date.parse("31/03/2019"), daily_goal: "30 minutes practice", category: music)
+c_goal = Goal.create(name: "Learn Piano", user_id: 1, description: "Learning piano is fun and useful.", overall_goal: "Grade 6 Piano", due_date: Date.parse("31/03/2019"), start_date: Date.parse("01/02/2016"), daily_goal: "30 minutes practice", category: music)
 
-c_goal2 = Goal.create(name: "Learn Javascript", user_id: 1, description: "Getting ready for mod 3", daily_goal: "30 minutes javascript learning", category: education)
+c_goal2 = Goal.create(name: "Learn Javascript", user_id: 1, description: "Getting ready for mod 3", overall_goal: "JS mastery", due_date: Date.parse("07/12/2018"), start_date: Date.parse("08/10/2018"), daily_goal: "30 minutes javascript learning", category: education)
 
 cmt1 = Comment.create(commenter_id: 1, goal_id: 1, content: "Fantastic job!")
 cmt2 = Comment.create(commenter_id: 2, goal_id: 2, content: "Keep it up!")

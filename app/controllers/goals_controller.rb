@@ -1,8 +1,8 @@
 class GoalsController < ApplicationController
 
-  # before_action :require_login
-  # skip_before_action :require_login, only: [:index, :show]
-  # before_action :require_goal_owner, only: [:edit, :update, :destroy]
+  before_action :require_login
+  skip_before_action :require_login, only: [:index, :show]
+  before_action :require_goal_owner, only: [:edit, :update, :destroy]
 
   def index
     @goals = Goal.all
