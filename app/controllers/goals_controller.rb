@@ -1,8 +1,8 @@
 class GoalsController < ApplicationController
 
-  before_action :require_login
-  skip_before_action :require_login, only: [:index, :show]
-  before_action :require_goal_owner, only: [:edit, :update, :destroy]
+  # before_action :require_login
+  # skip_before_action :require_login, only: [:index, :show]
+  # before_action :require_goal_owner, only: [:edit, :update, :destroy]
 
   def index
     @goals = Goal.all
@@ -18,7 +18,7 @@ class GoalsController < ApplicationController
 
   def create
     @goal = Goal.new(goal_params)
-    if @goal.save?
+    if @goal.save
       redirect_to @goal
     else
       render :new
@@ -56,7 +56,7 @@ class GoalsController < ApplicationController
   end
 
   def require_login
-    if !user_logged_in?
+    if !user_signed_in?
     flash[:error] = "You must be logged in to add or edit goals!"
     redirect_to new_user_session_path
     end
