@@ -19,7 +19,8 @@ def self.goals_due_soon #Show goals due soon (class method)
 end
 
 def goals_met_today #number of daily goals met today
-  DailyGoalMet.select {|dg| dg.date == Date.current }
+  daily_goals_met_today = DailyGoalMet.select {|dg| dg.date == Date.current }
+  daily_goals_met_today.count
 end
 
 def percentage_of_daily_goals_met
@@ -27,18 +28,23 @@ def percentage_of_daily_goals_met
   percentage_successful = (days_since_goal_began / user.daily_goal_met.count)*100
 end
 
+def daily_goal_streak
+  if !daily_goal_met.yesterday
+    streak = 0
+  end
+
 
 def number_of_comments #instance
   self.comments.count
 end
 
-def self.number_of_comments #instance
+def self.number_of_comments #overall
   Comment.count
 end
 
 def number_of_users_who_have_commented #Number of unique commenters (instance)
-  comment_users = self.comments.map do |comments|
-    comments.user
+  comment_users = self.comments.map do |comment|
+    comment.user
   end
   comment_users.uniq.count
 end
