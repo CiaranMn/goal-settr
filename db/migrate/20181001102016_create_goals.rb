@@ -5,10 +5,11 @@ class CreateGoals < ActiveRecord::Migration[5.2]
       t.text :description
       t.string :overall_goal
       t.datetime :due_date
-      t.datetime :start_date 
+      t.datetime :start_date
       t.string :daily_goal
       t.integer :category_id
       t.integer :user_id
+      t.boolean :achieved
       t.timestamps
     end
   end
