@@ -75,10 +75,17 @@ h1 {
 
 form {
   font-family: Verdana, Arial, sans-serif;
-  font-size: 1.1em;
+  font-size: 1em;
 }
 
 input {
   font-family: Verdana, Arial, sans-serif;
   font-size: 0.8em;
+}
+
+input[type="submit"] {
+    width: 80px;
+    height: 60px;
+    font-size: 1em;
+    margin: 10px 0px;
 }
