@@ -56,9 +56,10 @@ class GoalsController < ApplicationController
   end
 
   def require_login
-    unless user_logged_in?
+    if !user_logged_in?
     flash[:error] = "You must be logged in to add or edit goals!"
     redirect_to new_user_session_path
+    end
   end
 
   def require_goal_owner
