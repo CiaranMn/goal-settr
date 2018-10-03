@@ -51,7 +51,7 @@ class Goal < ApplicationRecord
 
   def percentage_of_daily_goals_met
     days_since_goal_began = (Date.current - self.start_date.to_date).to_f
-    percentage_successful = (self.daily_goal_mets.count.to_f / days_since_goal_began)*100.to_i
+    percentage_successful = ((self.daily_goal_mets.count.to_f / days_since_goal_began)*100).to_i
   end
 
   def daily_goal_streak
@@ -100,6 +100,10 @@ class Goal < ApplicationRecord
     self.boosts.map do |boost|
       boost.user
     end.uniq.count
+  end
+
+  def user_name
+    user.name
   end
 
 end
