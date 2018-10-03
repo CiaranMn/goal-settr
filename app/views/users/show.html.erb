@@ -1,1 +1,46 @@
-<h1> Welcome, <%= current_user.email %> </h1>
+
+<h1><%=@user.name %>'s page</h1>
+
+<% @goals.each do |goal| %>
+<h4><%= goal.name %></h4>
+ <%= goal.percentage_of_daily_goals_met %> %
+ <% end %>
+
+
+<h1><%= @user.name%> 's Personal Goal Dashboard</h1>
+ <table>
+  <tr>
+    <td>Active goals</td>
+    <td><%= @goals.count %></td>
+  </tr>
+  <tr>
+    <td>Goals achieved</td>
+    <td><%= @user.goals_achieved.count %>
+  </tr>
+  <tr>
+    <td>Goals due soon</td>
+    <td><%= @goals.goals_due_soon.count %></td>
+  </tr>
+</table>
+<br>
+<h2>Community</h2>
+ <table>
+  <tr>
+    <td>Total boosts given</td>
+    <td><%= @user.num_boosts_given %></td>
+  </tr>
+  <tr>
+    <td>Total boosts recieved</td>
+    <td><%= @user.num_boosts_received %></td>
+  </tr>
+  <tr>
+    <td>Total comments recieved</td>
+    <td><%= @user.num_comments_received %></td>
+  </tr>
+  <tr>
+    <td>Total comments recieved</td>
+    <td><%= @user.num_comments_received %></td>
+  </tr>
+</table>
+
+<%= link_to 'Back to homepage', '/' %>
