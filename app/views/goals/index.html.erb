@@ -1,0 +1,41 @@
+<h1>Goals Dashboard</h1>
+
+<table>
+  <tr>
+    <td>Active</td>
+    <td><%= Goal.all.count %></td>
+  </tr>
+  <tr>
+    <td>Achieved</td>
+    <td><%= Goal.valid_goals.count %>
+  </tr>
+  <tr>
+    <td>Due soon</td>
+    <td><%= Goal.goals_due_soon.count %></td>
+  </tr>
+</table>
+<br>
+<h2>Daily Goals</h2>
+
+<table>
+  <tr>
+    <td>Total met</td>
+    <td><%= DailyGoalMet.count %></td>
+  </tr>
+  <tr>
+    <td>% met</td>
+    <td><%= Goal.average_percent_daily_goals_met %>%</td>
+  </tr>
+  <tr>
+    <td>Met yesterday</td>
+    <td><%= Goal.num_daily_goals_met_yesterday %></td>
+  </tr>
+  <tr>
+    <td>Current streak</td>
+    <td><%= Goal.longest_current_streak_count %></td>
+  </tr>
+  <tr>
+    <td>Record streak</td>
+    <td><%= Goal.record_streak_count %></td>
+  </tr>
+</table>
