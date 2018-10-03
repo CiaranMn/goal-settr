@@ -1,5 +1,7 @@
 /* The following deals with the fixed navigation header bar */
 
+/* @import "folder/file" */
+
 header {
   position: fixed;
   top: 0;
@@ -73,6 +75,12 @@ body {
   color: teal;
 }
 
+h1 {
+  font-size: 1.8em;
+}
+
+/* table styling */
+
 td {
   font-size: 1.2em;
   border-bottom: 1px solid teal;
@@ -85,9 +93,23 @@ tr:hover {
   background-color: rgb(213, 237, 226);
 }
 
-h1 {
-  font-size: 1.8em;
+td {
+  font-size: 1.2em;
+  border-bottom: 1px solid teal;
+  padding: 10px;
+  min-width: 120px;
+  text-align: center;
 }
+
+tr:hover {
+  background-color: rgb(213, 237, 226);
+}
+
+.goals-leaderboard {
+
+}
+
+/* form styling */
 
 form {
   font-family: Verdana, Arial, sans-serif;
@@ -110,4 +132,8 @@ input[type="submit"] {
 
 div[id^="flash"] {
   color: rgb(221, 28, 28);
+}
+
+.field_with_errors {
+  border: 1px solid rgb(221, 28, 28);
 }
