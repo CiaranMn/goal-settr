@@ -25,7 +25,7 @@ end
 
 def percentage_of_daily_goals_met
   days_since_goal_began = (Date.current - self.start_date.to_date).to_f
-  percentage_successful = (self.daily_goal_mets.count.to_f / days_since_goal_began)*100
+  percentage_successful = ((self.daily_goal_mets.count.to_f / days_since_goal_began) * 100).to_i
 end
 
 def daily_goal_streak
