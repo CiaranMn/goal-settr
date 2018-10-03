@@ -9,7 +9,7 @@ class Goal < ApplicationRecord
   has_many :daily_goal_mets
 
   def self.valid_goals
-    Goal.all.select { |goal| goal.start_date >= Date.current }
+    Goal.all.select { |goal| goal.start_date <= Date.current }
   end
 
   def self.goals_due_soon # Show goals due soon (class method)
