@@ -2,15 +2,15 @@
 
 <table>
   <tr>
-    <td>Active goals</td>
+    <td>Active</td>
     <td><%= Goal.all.count %></td>
   </tr>
   <tr>
-    <td>Goals achieved</td>
-    <td><%= Goal.goals_achieved.count %>
+    <td>Achieved</td>
+    <td><%= Goal.valid_goals.count %>
   </tr>
   <tr>
-    <td>Goals due soon</td>
+    <td>Due soon</td>
     <td><%= Goal.goals_due_soon.count %></td>
   </tr>
 </table>
@@ -28,10 +28,14 @@
   </tr>
   <tr>
     <td>Met yesterday</td>
-    <td>[TBC]</td>
+    <td><%= Goal.num_daily_goals_met_yesterday %></td>
   </tr>
   <tr>
-    <td>Longest streak</td>
-    <td>[TBC]</td>
+    <td>Current streak</td>
+    <td><%= Goal.longest_current_streak_count %></td>
+  </tr>
+  <tr>
+    <td>Record streak</td>
+    <td><%= Goal.record_streak_count %></td>
   </tr>
 </table>

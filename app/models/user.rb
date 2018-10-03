@@ -74,23 +74,37 @@ class User < ApplicationRecord
   end
 
   def daily_goal_mets
-    # needs to check interaction with goals
-    goals.map(&:daily_goal_mets).inject(0, :+)
+    goals.map { |goal| goal.daily_goal_mets.count }.inject(0, :+)
   end
 
   def percent_daily_goal_mets
-    # needs to check interaction with goals
-    goals.map(&:percent_daily_goal_mets).inject(0, :+).to_f / goals.count
+    goals.map(&:percentage_of_daily_goals_met).inject(0, :+).to_f / goals.count.to_f
   end
 
-  def num_unique_commenters
-    # needs to check interaction with goals
+  def unique_commenters
     goals.map(&:unique_commenters).uniq
+  end
+
+  def number_of_boosters
+    goals.map(&:number_of_boosters).inject(0, :+)
   end
 
   def current_streak
     # needs to check interaction with goals
-    goals.max_by(&:current_streak).current_streak
+    goals.max_by(&:daily_goal_streak)
+  end
+
+  def record_streak
+    goals.max_by(&:longest_daily_goal_streak)
+  end
+
+  def current_streak_count
+    # needs to check interaction with goals
+    current_streak.daily_goal_streak
+  end
+
+  def record_streak_count
+    record_streak.longest_daily_goal_streak
   end
 
 end
