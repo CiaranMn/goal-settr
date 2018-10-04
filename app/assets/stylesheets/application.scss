@@ -107,14 +107,18 @@ h2 {
 /* table styling */
 
 #goals-index {
-  display: flex;
-  flex-wrap: wrap;
+  width: 600px;
 }
 
 #show-goal {
   width: 600px;
   margin: auto;
 }
+
+#show-goal td {
+  width: 300px;
+}
+
 
 .comment-box {
   width: 600px;
@@ -127,17 +131,6 @@ h2 {
   display: flex;
   justify-content: center;
   flex-flow: row wrap;
-}
-
-.stacked {
-  display: inline;
-  padding-bottom: 20px;
-}
-
-.stacked-left {
-  display: inline;
-  padding-bottom: 20px;
-  padding-right: 50px;
 }
 
 td, th {

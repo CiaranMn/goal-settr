@@ -14,6 +14,7 @@ class GoalsController < ApplicationController
 
   def show
     set_goal
+    @boost = Boost.new
     @comment = Comment.new
   end
 

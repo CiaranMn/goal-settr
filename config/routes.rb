@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   resources :users
 
   resources :comments, only: [:create]
+  resources :boosts, only: [:create]
 
 end
