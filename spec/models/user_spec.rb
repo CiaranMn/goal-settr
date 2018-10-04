@@ -13,10 +13,10 @@ describe 'User' do
 
 describe 'user log in' do
   it 'allows an existing user to sign in' do
-    User.create! (email: "bob@fakeemail.com", password:"s3cur3p4ssw0rd")
+    User.create!(email: "bob@fakeemail.com", password:"s3cur3p4ssw0rd")
     visit '/users/sign_in'
 
-    fill_in 'Email', with "bob@fakeemail.com"
+    fill_in 'Email', with: "bob@fakeemail.com"
     fill_in 'Password', with: "s3cur3p4ssw0rd"
 
     click_button 'Sign in'

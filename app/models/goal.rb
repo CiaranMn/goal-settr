@@ -45,6 +45,10 @@ class Goal < ApplicationRecord
     (percentage_total.to_f / valid_goals.count.to_f).to_i
   end
 
+  def valid_goals
+    self.goals.select { |goal| goal.start_date <= Date.current }
+  end
+
   def days_to_goal_due_date #Time to goal due date (instance method)
     (self.due_date.to_date - Date.current).to_i
   end

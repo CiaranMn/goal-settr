@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def index
    @users = User.all
    # byebug
-   @latest_users = @users.sort_by {|u| u.created_at}[1..10].reverse
+   @latest_users = @users.select {|user| !user.goals.empty? }.sort_by {|u| u.created_at}[1..10].reverse
   end
 
   def show
@@ -51,20 +51,6 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name)
-  end
-
-
-
-  def sortable_columns
-    ["name", "goals_achieved"]
-  end
-
-  def sort_column
-    sortable_columns.include?(params[:column]) ? params[:column] : "name"
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
 

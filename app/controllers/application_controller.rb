@@ -8,6 +8,17 @@ class ApplicationController < ActionController::Base
     flash[:error] = "You must be logged in to do that!"
     redirect_to new_user_session_path
   end
+  end
+
+  def after_sign_up_path_for(resource)
+    byebug
+  if resource.is_a?(User)
+  redirect_to new_goal_path
+  else
+    super
+  end
+end
+
 
   protected
 
