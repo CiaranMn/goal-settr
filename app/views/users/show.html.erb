@@ -1,13 +1,34 @@
+<div class="container">
+<%if current_user == @user%>
+<h1>This is your profile</h1>
+<h2><%=@user.last_sign_in_at%></h2>
+<%else%>
+  <h2><%=@user.name %>'s profile</h2>
+<h1><%=@user.last_sign_in_at%></h1>
+<%end%>
 
-<h1><%=@user.name %>'s page</h1>
+
+<%if @user.goals.empty? %>
+<h3><%= @user.name %> doesn't have any live goals</h3>
+<% elsif current_user == @user && !@user.goals.empty?%>
+  <h1>Your goals</h1>
+  <%else%>
+    <h1><%=@user.name %> wants to:</h1>
+  <%end%>
+
 
 <% @goals.each do |goal| %>
-<h4><%= goal.name %></h4>
- <%= goal.percentage_of_daily_goals_met %> %
+<h2><%= goal.name %></h2>
+ <h3><%= goal.percentage_of_daily_goals_met.to_i %>% complete </h3>
+ <div class="progress" width="50%">
+<div class="progress-bar progress-bar-info w-75" role="progressbar"
+ aria-valuenow="<%= goal.percentage_of_daily_goals_met %>" aria-valuemin="0" aria-valuemax="100"   style="width: <%= "#{goal.percentage_of_daily_goals_met}%" %>">
+</div>
+</div>
  <% end %>
 
 
-<h1><%= @user.name%> 's Personal Goal Dashboard</h1>
+<h2><%= @user.name%>'s Progress</h2>
  <table>
   <tr>
     <td>Active goals</td>
@@ -23,6 +44,7 @@
   </tr>
 </table>
 <br>
+
 <h2>Community</h2>
  <table>
   <tr>
@@ -43,4 +65,7 @@
   </tr>
 </table>
 
+<%= link_to 'Edit profile', "/users/#{@user.id}/edit"%>
+
 <%= link_to 'Back to homepage', '/' %>
+</div>

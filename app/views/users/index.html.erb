@@ -1,0 +1,21 @@
+<h1> Our community has <%=@users.count %> goal-settrs </h1>
+
+
+<h3>Recently active users</h3>
+<table>
+
+  <% @latest_users.each do |user| %>
+<div class="card-group">
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title"><%= link_to user.name, user%></h3>
+      <% if !user.goals.empty? %>
+        <p class="card-text"><small class="text-muted"><%= user.goals.last.name%></small></p>
+        <p class="card-text"><small class="text-muted"><%= user.goals.last.overall_goal%></small></p>
+      <p class="card-text"><small class="text-muted">Last daily goal met <%= user.daily_goal_mets.last.date %></small></p>
+      <%end%>
+    </div>
+  </div>
+ <% end %>
+
+</table>

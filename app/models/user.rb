@@ -20,6 +20,18 @@ class User < ApplicationRecord
     end
   end
 
+  def current_user
+  @current_user ||= User.find(session[:user_id]) if session[:user_id]
+end
+
+  def newest_goal
+    self.try(:goals).first.name
+  end
+
+  # def newest_goal_description
+  #   newest_goal.description
+  # end
+
   def self.boosts_given_scoreboard
     scoreboard(&:num_boosts_given)
   end
@@ -73,7 +85,7 @@ class User < ApplicationRecord
     goals.select { |goal| goal.achieved == true }
   end
 
-  def daily_goal_mets
+  def daily_goal_mets_count
     goals.map { |goal| goal.daily_goal_mets.count }.inject(0, :+)
   end
 
