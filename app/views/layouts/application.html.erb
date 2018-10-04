@@ -18,12 +18,13 @@
   <header>
     <div class="nav-container">
       <div class="logo-nav">
+        <%= image_tag("launch.png", :alt => "boost! logo") %>
         <%= link_to "boost!", '/' %>
       </div>
 
       <div class="middle-nav">
         <li><%= link_to "Goals", goals_path %></li>
-        <li><%= link_to "Categories", '/' %></li>
+        <li><%= link_to "Categories", '/category' %></li>
         <li><%= link_to "Users", users_path %></li>
       </div>
 

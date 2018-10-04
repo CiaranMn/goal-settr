@@ -63,9 +63,35 @@ h2 {
   width: 300px;
 }
 
+#users-index {
+  width: 600px;
+}
+
+
+/* table styling */
+
+.profile-buttons {
+  width: 630px;
+  margin: auto;
+  text-align: center;
+  line-height: 1.0;
+}
+
+#jumbotron-users {
+  padding-left: 60px;
+  padding-right: 60px;
+   border-radius: 60px;
+  margin: auto;
+}
+
+.user-profile-headline {
+  width: 600px;
+  margin: auto;
+  
 .stacked {
   display: inline;
   padding-bottom: 20px;
+
 }
 
 .comment-box {

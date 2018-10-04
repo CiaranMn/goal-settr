@@ -1,0 +1,23 @@
+<h1><%=@category.name%></h1>
+
+<%if @category.users.count == 0%>
+<h2>No users have set goals in this category. <%= link_to 'Be the first?', new_goal_path%></h2>
+<%else%>
+<h2><%=@category.users.count%> users have set goals in this category. You can <%= link_to 'add a goal', new_goal_path%>, too.</h2>
+<%end%>
+
+
+<%if @category.num_goals == 0%>
+<h2>No goals have been set in this category. <%= link_to 'Be the first?', new_goal_path%></h2>
+<%else%>
+<h2><%=@category.num_goals%> goals have been set in this category.</h2>
+<%end%>
+
+<%@category.users.each do |user|%>
+<%=link_to user.name, user%>'s goal is to
+<%user.goals.each do |goal|%>
+  <%if goal.category == @category%>
+    <%=link_to goal.name, goal%><br>
+    <%end%>
+<%end%>
+<%end%>

@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
+  resources :category, only: [:show, :index]
+
   get '/goals/:id/delete', to: 'goals#confirm_delete', as: 'confirm_delete'
 
   get '/goals/:id/calendar', to: 'goals#calendar', as: 'calendar'

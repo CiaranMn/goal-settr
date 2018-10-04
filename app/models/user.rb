@@ -86,36 +86,44 @@ end
   end
 
   def daily_goal_mets_count
+    return 0 if goals.empty?
     goals.map { |goal| goal.daily_goal_mets.count }.inject(0, :+)
   end
 
   def percent_daily_goal_mets
+    return 0 if goals.empty?
     goals.map(&:percentage_of_daily_goals_met).inject(0, :+).to_f / goals.count.to_f
   end
 
   def unique_commenters
+    return 0 if goals.empty?
     goals.map(&:unique_commenters).uniq
   end
 
   def number_of_boosters
+    return 0 if goals.empty?
     goals.map(&:number_of_boosters).inject(0, :+)
   end
 
   def current_streak
+    return 0 if goals.empty?
     # needs to check interaction with goals
     goals.max_by(&:daily_goal_streak)
   end
 
   def record_streak
+    return 0 if goals.empty?
     goals.max_by(&:longest_daily_goal_streak)
   end
 
   def current_streak_count
     # needs to check interaction with goals
-    current_streak.daily_goal_streak
+    return 0 if goals.empty?
+      current_streak.daily_goal_streak
   end
 
   def record_streak_count
+    return 0 if goals.empty?
     record_streak.longest_daily_goal_streak
   end
 

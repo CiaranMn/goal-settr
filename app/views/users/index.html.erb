@@ -1,21 +1,31 @@
-<h1> Our community has <%=@users.count %> goal-settrs </h1>
 
 
-<h3>Recently active users</h3>
+  <div class="jumbotron jumbotron-fluid" id="jumbotron-users">
+    <h1 class="display-4">boost! your life</h1>
+    <p class="lead">Ready to commit to your goals and support your friends? <%=link_to 'Sign up today!', new_user_registration_path%></p>
+    <hr class="my-4">
+    <p>A friendly community of <%=@users.count %> users, established 2018</p>
+  </div>
+
+
+
+
+
+<h1>Recently active users</h1>
 <table>
 
-  <% @latest_users.each do |user| %>
-<div class="card-group">
+<% @latest_users.each do |user| %>
+<th><div class="card-group">
   <div class="card">
     <div class="card-body">
       <h3 class="card-title"><%= link_to user.name, user%></h3>
       <% if !user.goals.empty? %>
-        <p class="card-text"><small class="text-muted"><%= user.goals.last.name%></small></p>
-        <p class="card-text"><small class="text-muted"><%= user.goals.last.overall_goal%></small></p>
-      <p class="card-text"><small class="text-muted">Last daily goal met <%= user.daily_goal_mets.last.date %></small></p>
+        <p class="card-text"><small class="text-muted">Goal: <%= user.goals.last.name%></small></p>
+        <p class="card-text"><small class="text-muted"> <%= user.goals.last.overall_goal%></small></p>
+      <p class="card-text"><small class="text-muted"><%=user.name%> has met <%= user.daily_goal_mets.count%> daily goals!</small></p>
       <%end%>
     </div>
-  </div>
+  </div></th>
  <% end %>
 
 </table>
