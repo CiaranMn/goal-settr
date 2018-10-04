@@ -5,11 +5,17 @@ class GoalsController < ApplicationController
   before_action :require_goal_owner, only: [:edit, :update, :destroy]
 
   def index
-    @goals = Goal.all
+    if !params[:q]
+      @goals = Goal.all
+    else
+      @goals = goals_sorter
+    end
   end
 
   def show
     set_goal
+    @boost = Boost.new
+    @comment = Comment.new
   end
 
   def new
@@ -18,6 +24,7 @@ class GoalsController < ApplicationController
 
   def create
     @goal = Goal.new(goal_params)
+    @goal.user = current_user
     if @goal.save
       redirect_to @goal
     else
@@ -52,14 +59,7 @@ class GoalsController < ApplicationController
   end
 
   def goal_params
-    params.require(:goal).permit(:name, :description, :overall_goal, :due_date, :start_date, :daily_goal, :category_id, :user_id, :achieved)
-  end
-
-  def require_login
-    if !user_signed_in?
-    flash[:error] = "You must be logged in to add or edit goals!"
-    redirect_to new_user_session_path
-    end
+    params.require(:goal).permit(:name, :description, :overall_goal, :due_date, :start_date, :daily_goal, :category_id, :achieved)
   end
 
   def require_goal_owner
@@ -67,6 +67,23 @@ class GoalsController < ApplicationController
     if current_user != @goal.user
       flash[:alert] = "You must be logged in as #{@goal.user.username} to edit this goal!"
       redirect_to @goal
+    end
+  end
+
+  def goals_sorter
+    case params[:q]
+      when 'name'
+        Goal.all.sort_by(&:name)
+      when 'user'
+        Goal.all.sort_by(&:user_name)
+      when 'percent'
+        Goal.all.sort_by(&:percentage_of_daily_goals_met).reverse
+      when 'streak'
+        Goal.all.sort_by(&:daily_goal_streak).reverse
+      when 'due'
+        Goal.all.sort_by(&:due_date)
+      else
+        Goal.all
     end
   end
 

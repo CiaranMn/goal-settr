@@ -9,7 +9,7 @@ class Goal < ApplicationRecord
   has_many :daily_goal_mets
 
   def self.valid_goals
-    Goal.all.select { |goal| goal.start_date >= Date.current }
+    Goal.all.select { |goal| goal.start_date <= Date.current }
   end
 
   def self.goals_due_soon # Show goals due soon (class method)
@@ -51,7 +51,11 @@ class Goal < ApplicationRecord
 
   def percentage_of_daily_goals_met
     days_since_goal_began = (Date.current - self.start_date.to_date).to_f
-    percentage_successful = (self.daily_goal_mets.count.to_f / days_since_goal_began)*100.to_i
+    if days_since_goal_began <= 0
+      return 0
+    else
+      ((self.daily_goal_mets.count.to_f / days_since_goal_began)*100).to_i
+    end
   end
 
   def daily_goal_streak
@@ -100,6 +104,10 @@ class Goal < ApplicationRecord
     self.boosts.map do |boost|
       boost.user
     end.uniq.count
+  end
+
+  def user_name
+    user.name
   end
 
 end

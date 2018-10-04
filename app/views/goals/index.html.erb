@@ -1,41 +1,71 @@
-<h1>Goals Dashboard</h1>
+<div class="container" id="goals-index">
 
-<table>
-  <tr>
-    <td>Active</td>
-    <td><%= Goal.all.count %></td>
-  </tr>
-  <tr>
-    <td>Achieved</td>
-    <td><%= Goal.valid_goals.count %>
-  </tr>
-  <tr>
-    <td>Due soon</td>
-    <td><%= Goal.goals_due_soon.count %></td>
-  </tr>
-</table>
-<br>
-<h2>Daily Goals</h2>
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Overall Goals</h1>
+      <table class="overall-goals">
+        <tr>
+          <td>Active</td>
+          <td><%= Goal.all.count %></td>
+        </tr>
+        <tr>
+          <td>Achieved</td>
+          <td><%= Goal.valid_goals.count %>
+        </tr>
+        <tr>
+          <td>Due soon</td>
+          <td><%= Goal.goals_due_soon.count %></td>
+        </tr>
+      </table>
+    </div>
 
-<table>
-  <tr>
-    <td>Total met</td>
-    <td><%= DailyGoalMet.count %></td>
-  </tr>
-  <tr>
-    <td>% met</td>
-    <td><%= Goal.average_percent_daily_goals_met %>%</td>
-  </tr>
-  <tr>
-    <td>Met yesterday</td>
-    <td><%= Goal.num_daily_goals_met_yesterday %></td>
-  </tr>
-  <tr>
-    <td>Current streak</td>
-    <td><%= Goal.longest_current_streak_count %></td>
-  </tr>
-  <tr>
-    <td>Record streak</td>
-    <td><%= Goal.record_streak_count %></td>
-  </tr>
-</table>
+    <div class="col-md-6">
+      <h1>Daily Goals</h1>
+      <table>
+        <tr>
+          <td>Total met</td>
+          <td><%= DailyGoalMet.count %></td>
+        </tr>
+        <tr>
+          <td>% met</td>
+          <td><%= Goal.average_percent_daily_goals_met %>%</td>
+        </tr>
+        <tr>
+          <td>Met yesterday</td>
+          <td><%= Goal.num_daily_goals_met_yesterday %></td>
+        </tr>
+        <tr>
+          <td><%= link_to "Current streak", Goal.longest_current_streak %></td>
+          <td><%= link_to Goal.longest_current_streak_count, Goal.longest_current_streak %></td>
+        </tr>
+        <tr>
+          <td><%= link_to "Record streak", Goal.record_streak %></td>
+          <td><%= link_to Goal.record_streak_count, Goal.record_streak %></td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-10">
+      <h1>Leaderboard</h1>
+      <table class="goals-leaderboard">
+        <th><%= link_to "Goal", goals_path({q: :name}) %></th>
+        <th><%= link_to "User", goals_path({q: :user}) %></th>
+        <th><%= link_to "Daily %", goals_path({q: :daily}) %></th>
+        <th><%= link_to "Streak", goals_path({q: :streak}) %></th>
+        <th><%= link_to "Due Date", goals_path({q: :due}) %></th>
+
+      <% @goals.each do |goal| %>
+        <tr>
+          <td><%= link_to goal.name, goal %></td>
+          <td><%= link_to goal.user.name, goal.user %></td>
+          <td><%= goal.percentage_of_daily_goals_met %>%</td>
+          <td><%= goal.daily_goal_streak %></td>
+          <td><%= goal.due_date.to_date %></td>
+        </a></tr>
+      <% end %>
+    </div>
+  </div>
+</div>

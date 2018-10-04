@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2018_10_02_095609) do
   create_table "boosts", force: :cascade do |t|
     t.integer "booster_id"
     t.integer "goal_id"
-    t.string "type"
+    t.string "boost_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

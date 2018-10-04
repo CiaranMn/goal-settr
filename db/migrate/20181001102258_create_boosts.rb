@@ -3,7 +3,7 @@ class CreateBoosts < ActiveRecord::Migration[5.2]
     create_table :boosts do |t|
       t.integer :booster_id
       t.integer :goal_id
-      t.string :type
+      t.string :boost_type
       t.timestamps
     end
   end

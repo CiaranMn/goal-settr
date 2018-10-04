@@ -1,0 +1,99 @@
+
+  <div class='centered-text'>
+    <h1><%= @goal.name %></h1>
+    <% if current_user == @goal.user %>
+      <%= link_to "(Edit goal)", edit_goal_path %>
+      <br><br>
+    <% else %>
+      <br><br>
+    <% end %>
+  </div>
+
+<%= link_to 'edit profile', "/users/#{@user.id}/edit" %>
+
+  <table id='show-goal'>
+    <tr>
+      <td>User</td>
+      <td><%= link_to @goal.user_name, @goal %></td>
+    </tr>
+    <tr>
+      <td>Overall goal</td>
+      <td><%= @goal.overall_goal %>
+    </tr>
+    <tr>
+      <td>Due</td>
+      <td><%= @goal.due_date.to_date %></td>
+    </tr>
+    <tr>
+      <td>Daily goal</td>
+      <td><%= @goal.daily_goal %></td>
+    </tr>
+    <tr>
+      <td>Current streak</td>
+      <td><%= @goal.daily_goal_streak %></td>
+    </tr>
+    <tr>
+      <td>Record streak</td>
+      <td><%= @goal.longest_daily_goal_streak %></td>
+    </tr>
+    <tr>
+      <td>Category</td>
+      <td><%= @goal.category.name %></td>
+    </tr>
+    <% if !@goal.description.empty? %>
+      <tr>
+        <td colspan="2"><%= @goal.description %></td>
+      </tr>
+    <% end %>
+  </table>
+  <br>
+
+  <% if !@goal.boosts.empty? %>
+    <div class="comment-box">
+      <% @goal.boosts.each do |boost| %>
+        <i class='<%= boost.icon_selector %>' title=' <%=boost.user.name %>' style="font-size: 20px;"></i>
+      <% end %>
+    </div><br>
+  <% end %>
+
+  <div class="comment-box">
+    <% @goal.comments.each do |comment| %>
+      <p>[<%= comment.created_at.to_date %>] <b><%= link_to comment.user.name, comment.user %> said:</b> <%= comment.content %></p>
+    <% end %>
+  </div>
+  <br>
+
+  <% if user_signed_in? %>
+    <div class="new-comment-box">
+
+      <%= form_for @boost do |f| %>
+        <%= f.hidden_field :goal_id, value: @goal.id %>
+        <%= f.hidden_field :boost_type, value: "thumbs" %>
+        <button type="submit" style="font-size:20px; width:60px;">
+        <i class="fa fa-thumbs-o-up" title="thumbs"></i></button>
+      <% end %>
+
+      <%= form_for @boost do |f| %>
+        <%= f.hidden_field :goal_id, value: @goal.id %>
+        <%= f.hidden_field :boost_type, value: "heart" %>
+        <button type="submit" style="font-size:20px; width:60px; margin-left: 10px;">
+        <i class="fa fa-heart" title="heart"></i></button>
+      <% end %>
+
+      <%= form_for @boost do |f| %>
+        <%= f.hidden_field :goal_id, value: @goal.id %>
+        <%= f.hidden_field :boost_type, value: "star" %>
+        <button type="submit" style="font-size:20px; width:60px; margin-left: 10px;">
+        <i class="fa fa-star" title="star"></i></button>
+      <% end %>
+    </div>
+    <br>
+    <div class="new-comment-box">
+      <%= form_for @comment do |f| %>
+        <%= f.label :content, "Comment: " %>
+        <%= f.text_field :content, required: true, size: 45 %>
+        <%= f.hidden_field :goal_id, value: @goal.id %>
+        <%= f.submit "Add Comment" %>
+      <% end %>
+    </div>
+  <% end %>
