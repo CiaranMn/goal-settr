@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
   devise_for :users
-
   resources :goals
 
   root 'home#index'
@@ -10,5 +9,6 @@ Rails.application.routes.draw do
 
   resources :comments, only: [:create]
   resources :boosts, only: [:create]
+
 
 end
