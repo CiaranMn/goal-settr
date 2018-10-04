@@ -29,7 +29,7 @@
         <% if date != "" %>
             <label>
             <%= f.check_box :daily_goal_mets, {
-              multiple: true, checked: @goal.check_date(date), disabled: date > Date.today }, date %>
+              multiple: true, checked: @goal.check_date(date), disabled: date > Date.today || date < @goal.start_date }, date %>
             <br>
             <%= date.day %>
             </label>

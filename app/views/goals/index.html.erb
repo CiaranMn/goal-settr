@@ -21,8 +21,19 @@
           <td>Due soon</td>
           <td><%= Goal.goals_due_soon.count %></td>
         </tr>
+        <tr>
+          <td colspan="2">
+            <div class='centered-text'>
+              <% if user_signed_in? %>
+                <%= link_to "Add a goal", new_goal_path %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
       </table>
     </div>
+    
+
     <div class="stacked">
       <h1>Daily Goals</h1>
       <table>
