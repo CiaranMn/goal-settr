@@ -6,7 +6,7 @@ class Boost < ApplicationRecord
   def icon_selector
     case boost_type
       when 'thumbs'
-        'fa fa-thumbs-o-up'
+        'far fa-thumbs-up'
       when 'heart'
         'fa fa-heart'
       when 'star'

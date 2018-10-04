@@ -1,6 +1,19 @@
 
+<!-- The title section, including awards for current and record streak if held by the goal -->
+
   <div class='centered-text'>
-    <h1><%= @goal.name %></h1>
+    <h1><%= @goal.name %>
+
+    <% if Goal.record_streak == @goal %>
+      <i class="fa fa-trophy" title="All time record streak!" style="font-size: 25px;"></i>
+    <% end %>
+
+    <% if Goal.longest_current_streak == @goal %>
+      <i class="fa fa-medal" title="Longest current streak!" style="font-size: 25px;"></i>
+    <% end %>
+    </h1>
+<!-- Display links to edit goal if the owner is viewing it -->
+
     <% if current_user == @goal.user %>
       <%= link_to "(log progress)", calendar_path %>  -
       <%= link_to "(edit goal)", edit_goal_path %>  -
@@ -9,6 +22,7 @@
     <br>
   </div>
 
+<!-- Information on the goal -->
   <table id='show-goal'>
     <tr>
       <td>User</td>
@@ -46,6 +60,7 @@
   </table>
   <br>
 
+<!-- Show any boosts received -->
   <% if !@goal.boosts.empty? %>
     <div class="comment-box">
       <% @goal.boosts.each do |boost| %>
@@ -54,6 +69,7 @@
     </div><br>
   <% end %>
 
+<!-- Show any comments received -->
   <div class="comment-box">
     <% @goal.comments.each do |comment| %>
       <p>[<%= comment.created_at.to_date %>] <b><%= link_to comment.user.name, comment.user %> said:</b> <%= comment.content %></p>
@@ -61,6 +77,7 @@
   </div>
   <br>
 
+<!-- Allow a logged-in user to add boosts or comments -->
   <% if user_signed_in? %>
     <div class="new-comment-box">
 
@@ -68,24 +85,25 @@
         <%= f.hidden_field :goal_id, value: @goal.id %>
         <%= f.hidden_field :boost_type, value: "thumbs" %>
         <button type="submit" style="font-size:20px; width:60px;">
-        <i class="fa fa-thumbs-o-up" title="thumbs"></i></button>
+        <i class="far fa-thumbs-up" title="thumbs"></i></button>
       <% end %>
 
       <%= form_for @boost do |f| %>
         <%= f.hidden_field :goal_id, value: @goal.id %>
         <%= f.hidden_field :boost_type, value: "heart" %>
-        <button type="submit" style="font-size:20px; width:60px; margin-left: 10px;">
+        <button type="submit" class="boost-btn">
         <i class="fa fa-heart" title="heart"></i></button>
       <% end %>
 
       <%= form_for @boost do |f| %>
         <%= f.hidden_field :goal_id, value: @goal.id %>
         <%= f.hidden_field :boost_type, value: "star" %>
-        <button type="submit" style="font-size:20px; width:60px; margin-left: 10px;">
+        <button type="submit" class="boost-btn">
         <i class="fa fa-star" title="star"></i></button>
       <% end %>
     </div>
     <br>
+
     <div class="new-comment-box">
       <%= form_for @comment do |f| %>
         <%= f.label :content, "Comment: " %>
@@ -95,4 +113,4 @@
       <% end %>
     </div>
   <% end %>
-  <br><br>
+<br><br>

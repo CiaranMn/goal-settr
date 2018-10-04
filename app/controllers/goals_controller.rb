@@ -61,14 +61,15 @@ class GoalsController < ApplicationController
   def calendar_update
     # first we destroy all existing DGM records for the month in question, in case some have been de-selected, using a class method in the model
     DailyGoalMet.delete_all_from_month(@goal, params[:goal][:month])
-
-    # then we iterate over the array and create DGMs dates which have been selected
-    params[:goal][:daily_goal_mets].each do |date|
-      if date != ""
-        DailyGoalMet.create(goal_id: @goal.id, date: date)
+    # then we iterate over the array and create DGMs dates which have been selected - if any
+    selections = params[:goal][:daily_goal_mets]
+    if selections
+      selections.each do |date|
+        if date != ""
+          DailyGoalMet.create(goal_id: @goal.id, date: date)
+        end
       end
     end
-
     flash[:alert] = "Progress recorded - keep it up!"
     redirect_to @goal
   end
