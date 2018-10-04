@@ -2,7 +2,7 @@ class GoalsController < ApplicationController
 
   before_action :require_login
   skip_before_action :require_login, only: [:index, :show]
-  before_action :require_goal_owner, only: [:edit, :update, :confirm_delete, :destroy]
+  before_action :require_goal_owner, only: [:edit, :update, :confirm_delete, :destroy, :calendar, :calendar_update]
 
   def index
     if !params[:q]
@@ -26,6 +26,7 @@ class GoalsController < ApplicationController
     @goal = Goal.new(goal_params)
     @goal.user = current_user
     if @goal.save
+      flash[:alert] = "Goal created!"
       redirect_to @goal
     else
       render :new
@@ -41,6 +42,7 @@ class GoalsController < ApplicationController
 
   def update
     if @goal.update(goal_params)
+      flash[:alert] = "Goal updated!"
       redirect_to @goal
     else
       render :edit
@@ -48,7 +50,27 @@ class GoalsController < ApplicationController
   end
 
   def calendar
+    if params[:date]
+      date = Date.parse(params[:date])
+    else
+      date = Date.today
+    end
+    @calendar = Calendar.new(date)
+  end
 
+  def calendar_update
+    # first we destroy all existing DGM records for the month in question, in case some have been de-selected, using a class method in the model
+    DailyGoalMet.delete_all_from_month(@goal, params[:goal][:month])
+
+    # then we iterate over the array and create DGMs dates which have been selected
+    params[:goal][:daily_goal_mets].each do |date|
+      if date != ""
+        DailyGoalMet.create(goal_id: @goal.id, date: date)
+      end
+    end
+
+    flash[:alert] = "Progress recorded - keep it up!"
+    redirect_to @goal
   end
 
   def confirm_delete
@@ -78,7 +100,7 @@ class GoalsController < ApplicationController
   def require_goal_owner
     set_goal
     if current_user != @goal.user
-      flash[:alert] = "You must be logged in as #{@goal.user.username} to edit this goal!"
+      flash[:alert] = "You must be logged in as #{@goal.user.name} to edit this goal!"
       redirect_to @goal
     end
   end

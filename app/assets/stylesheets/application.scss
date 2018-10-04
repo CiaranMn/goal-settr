@@ -104,6 +104,13 @@ h2 {
   text-align: center;
 }
 
+.centered-month-text {
+  display: flex;
+  width: 220px;
+  margin: auto;
+  justify-content: space-between;
+}
+
 /* table styling */
 
 #goals-index {
@@ -159,6 +166,39 @@ tr:hover {
   min-width: 120px;
 }
 
+#calendar {
+  display: flex;
+  justify-content: center;
+  flex-flow: nowrap;
+  font-size: 1em;
+  font-weight: normal;
+  & th, td {
+    height: 55px;
+    min-width: 80px;
+    padding: 7px;
+  }
+  & label {
+    display: inline-block;
+    width: 100%;
+    padding: 0px;
+  }
+  & tr:hover{
+    background-color: white;
+  }
+  & td:hover {
+    background-color: rgb(213, 237, 226);
+  }
+  & a {
+    background-color: white;
+    display:block;
+  }
+}
+
+.center {
+  width: 100px;
+  margin: auto;
+}
+
 /* form styling */
 
 form {
@@ -166,8 +206,8 @@ form {
 }
 
 .new_goal, .edit_goal {
-width: 400px;
-margin: auto;
+  width: 400px;
+  margin: auto;
 }
 
 .new_goal select {
@@ -184,4 +224,12 @@ div[id^="flash"] {
 
 .field_with_errors {
   border: 2px solid rgb(221, 28, 28);
+}
+
+#confirm-delete a {
+  color: rgb(221, 28, 28);
+}
+
+input[type=checkbox][disabled] {
+  outline: 2px solid red;
 }

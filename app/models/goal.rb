@@ -110,6 +110,10 @@ class Goal < ApplicationRecord
     end.uniq.count
   end
 
+  def check_date(date)
+    true if daily_goal_mets.all.find { |d| d.date == date }
+  end
+
   def user_name
     user.name
   end

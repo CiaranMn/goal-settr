@@ -1,8 +1,13 @@
-<br><br>
-<h3>Delete your goal to <%= @goal.name %>, <strong>are you sure?</strong></h3>
-<br><br>
-<h4>
-<%= link_to "I'm sure - delete the goal!", goal_path, method: :delete %>
-<br><br><br>
-<%= link_to "I cannot abandon this goal, take me back!", @goal %>
-</h4>
+<div class="comment-box">
+  <br><br>
+  <h3>Delete your goal to <%= @goal.name %>, <strong>are you sure?</strong></h3>
+  <br><br>
+
+  <h4>
+    <div id="confirm-delete">
+      <%= link_to "I'm sure - delete the goal!", goal_path, method: :delete %>
+    <br><br><br>
+      <%= link_to "I cannot abandon this goal, take me back!", @goal %>
+    </div>
+  </h4>
+</div>

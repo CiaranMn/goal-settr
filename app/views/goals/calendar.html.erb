@@ -1,4 +1,56 @@
-<table id="calendar">
-  <tr>
-    <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
-  </tr>
+<!-- The title -->
+<h1 class="centered-text">Log Daily Goals: <%= link_to @goal.name, @goal %> </h1>
+
+<h2 class="centered-text"><%= @goal.daily_goal %></h2>
+<br><h2 class="centered-month-text">
+
+<!-- Links to go back / foorward a month -->
+<a href="/goals/<%= "#{@goal.id}/#{@calendar.cal_go_down}" %>">
+<i class="fa fa-angle-double-left"></i></a>
+
+<%= @calendar.date.strftime("%B %Y")%>
+
+<a href="/goals/<%= "#{@goal.id}/#{@calendar.cal_go_up}" %>"> <i class="fa fa-angle-double-right"></i></a></h2>
+
+
+<!-- The form -->
+
+<!-- The each_with_index loop generates the grid for the calendar, displaying checkboxes according to the appropriate days in the month, and checks ones for which a daily goal has already been logged as being met -->
+<%= form_for @goal, url: { controller: :goals, action: :calendar_update, method: :patch } do |f| %>
+
+  <div id="calendar">
+    <table>
+    <tr>
+      <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+    </tr>
+    <tr>
+      <% @calendar.cal_array.each_with_index do |date, index| %>
+        <td>
+        <% if date != "" %>
+            <label>
+            <%= f.check_box :daily_goal_mets, {
+              multiple: true, checked: @goal.check_date(date), disabled: date > Date.today }, date %>
+            <br>
+            <%= date.day %>
+            </label>
+        <% end %>
+        </td>
+        <% if (index + 1) % 7 == 0 %>
+          </tr></tr>
+        <% end %>
+      <% end %>
+    </tr>
+  </table>
+  </div><br>
+
+<!--  Form submit, including a hidden field we will need in the goals controller to destroy existing records before recreating in case the user has deselected some -->
+
+<div class="center">
+
+  <%= f.hidden_field :month, value: @calendar.date.month %>
+
+    <%= f.submit "Update Goal" %>
+
+  <% end %>
+
+</div><br>

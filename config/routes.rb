@@ -11,4 +11,8 @@ Rails.application.routes.draw do
 
   get '/goals/:id/delete', to: 'goals#confirm_delete', as: 'confirm_delete'
 
+  get '/goals/:id/calendar', to: 'goals#calendar', as: 'calendar'
+
+  patch '/goals/:id/calendar', to: 'goals#calendar_update', as: 'calendar_update'
+
 end
