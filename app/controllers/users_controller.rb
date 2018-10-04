@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def index
    @users = User.all
    # byebug
-   @latest_users = @users.select {|user| !user.goals.empty? }.sort_by {|u| u.created_at}[1..10].reverse
+   @latest_users = @users.select {|user| !user.goals.empty? }.sort_by {|u| u.created_at}[0..10].reverse
   end
 
   def show

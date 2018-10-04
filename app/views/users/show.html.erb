@@ -1,18 +1,18 @@
 <div class="container" id="goals-index">
 
-
 <%if current_user == @user%>
-<h1>This is your profile</h1>
-<h2><%=@user.last_sign_in_at%></h2>
+  <h1>This is your profile <%= link_to "(edit)", edit_user_registration_path %> </h1>
+  <h2><%=@user.last_sign_in_at %></h2>
 <%end%>
 
 <div class="profile-buttons">
-<button type="button" class="btn btn-outline-primary mb1 bg-teal">
-  Boosts received <span class="badge badge-light"><%=@user.num_boosts_received%></span>
+  <button type="button" class="btn btn-outline-primary mb1 bg-teal">
+  Boosts received
+  <span class="badge badge-light"><%=@user.num_boosts_received%></span>
   <span class="sr-only"><%=@user.boosts_received%></span>
-</button>
+  </button>
   &nbsp;
-<button type="button" class="btn btn-outline-primary">
+  <button type="button" class="btn btn-outline-primary">
 Current streak <span class="badge badge-light"><%=@user.current_streak_count%></span>
   <span class="sr-only"><%=@user.current_streak_count%> day streak</span>
 </button>
@@ -30,26 +30,26 @@ Daily goals met <span class="badge badge-light"><%=@user.percent_daily_goal_mets
 
 
 <div class "user-profile-headline">
-<%if current_user != @user && @user.goals.empty? %>
-<h3><%= @user.name %> doesn't have any live goals</h3>
-<%elsif current_user = @user && @user.goals.empty?%>
-<h3>You don't have any live goals! Why not <%= link_to 'add a goal', new_goal_path %>?</h3>
-<% elsif current_user == @user && !@user.goals.empty?%>
-  <h1>Your goals</h1>
+  <% if current_user != @user && @user.goals.empty? %>
+    <h3><%= @user.name %> doesn't have any live goals</h3>
+  <% elsif current_user = @user && @user.goals.empty? %>
+    <h3>You don't have any live goals! Why not <%= link_to 'add a goal', new_goal_path %>?</h3>
+  <% elsif current_user == @user && !@user.goals.empty? %>
+    <h1>Your goals</h1>
   <%else%>
-    <h1><%=@user.name %>'s goals:</h1>
+      <h1><%=@user.name %>'s goals:</h1>
   <%end%>
 </div>
 
-
-<% @goals.each do |goal| %>
-<h1><%= link_to goal.name, goal %></h1> <p><%= goal.overall_goal %></p>
- <h2><%= goal.percentage_of_daily_goals_met.to_i %>% of daily goals met </h2>
- <div class="progress" width="50%">
-<div class="progress-bar progress-bar-info w-75" role="progressbar"
- aria-valuenow="<%= goal.percentage_of_daily_goals_met %>" aria-valuemin="0" aria-valuemax="100"   style="width: <%= "#{goal.percentage_of_daily_goals_met}%" %>">
-</div>
-</div>
+<div class="stacked">
+  <% @goals.each do |goal| %>
+    <h1><%= link_to goal.name, goal %></h1> <p><%= goal.overall_goal %></p>
+     <h2><%= goal.percentage_of_daily_goals_met.to_i %>% of daily goals met </h2>
+     <div class="progress" width="50%">
+        <div class="progress-bar progress-bar-info w-75" role="progressbar"
+         aria-valuenow="<%= goal.percentage_of_daily_goals_met %>" aria-valuemin="0" aria-valuemax="100"   style="width: <%= "#{goal.percentage_of_daily_goals_met}%" %>">
+        </div>
+     </div><br>
  <% end %>
 
 
@@ -65,7 +65,7 @@ Daily goals met <span class="badge badge-light"><%=@user.percent_daily_goal_mets
     <td> All live goals</td>
     <td><%= @goals.valid_goals.count %></td>
   </tr>
-  
+
   <tr>
     <td>Goals achieved</td>
     <td><%= @user.goals_achieved.count %>
@@ -88,21 +88,22 @@ Daily goals met <span class="badge badge-light"><%=@user.percent_daily_goal_mets
     <td><%= @user.num_boosts_received %></td>
   </tr>
   <tr>
-    <td>Total comments recieved</td>
-    <td><%= @user.num_comments_received %></td>
+    <td>Total comments given</td>
+    <td><%= @user.num_comments_given %></td>
   </tr>
   <tr>
-    <td>Total comments recieved</td>
+    <td>Total comments received</td>
     <td><%= @user.num_comments_received %></td>
   </tr>
 </table>
 
 </div>
 </div>
-<br>
+<br><br>
 
-
-<%=link_to 'Edit profile', edit_user_registration_path%>
-
-<%= link_to 'Back to homepage', '/' %>
+<div class='centered-text'>
+  <%=link_to 'Edit profile', edit_user_registration_path%>
+  &nbsp;&mdash;&nbsp;
+  <%= link_to 'Back to homepage', '/' %>
 </div>
+<br>

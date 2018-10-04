@@ -15,8 +15,8 @@
 <!-- Display links to edit goal if the owner is viewing it -->
 
     <% if current_user == @goal.user %>
-      <%= link_to "(log progress)", calendar_path %>  -
-      <%= link_to "(edit goal)", edit_goal_path %>  -
+      <%= link_to "(log progress)", calendar_path %>&nbsp;&mdash;&nbsp;
+      <%= link_to "(edit goal)", edit_goal_path %>&nbsp;&mdash;&nbsp;
       <%= link_to "(delete goal)", confirm_delete_path %>
     <% end %>
     <br>

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :boosts, only: :create
   resources :goals
 
-  root 'home#index'
+  root 'users#index'
 
   resources :category, only: [:show, :index]
 
