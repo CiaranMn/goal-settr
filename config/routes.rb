@@ -1,17 +1,20 @@
 Rails.application.routes.draw do
 
-  get 'category/index'
-  get 'category/show'
   devise_for :users
+  resources :users
+
+  resources :comments, only: :create
+  resources :boosts, only: :create
   resources :goals
 
   root 'home#index'
 
-  resources :users
   resources :category, only: [:show, :index]
 
-  resources :comments, only: [:create]
-  resources :boosts, only: [:create]
+  get '/goals/:id/delete', to: 'goals#confirm_delete', as: 'confirm_delete'
 
+  get '/goals/:id/calendar', to: 'goals#calendar', as: 'calendar'
+
+  patch '/goals/:id/calendar', to: 'goals#calendar_update', as: 'calendar_update'
 
 end

@@ -1,0 +1,27 @@
+#calendar {
+  display: flex;
+  justify-content: center;
+  flex-flow: nowrap;
+  font-size: 1em;
+  font-weight: normal;
+  & th, td {
+    height: 55px;
+    min-width: 80px;
+    padding: 7px;
+  }
+  & label {
+    display: inline-block;
+    width: 100%;
+    padding: 0px;
+  }
+  & tr:hover{
+    background-color: white;
+  }
+  & td:hover {
+    background-color: rgb(213, 237, 226);
+  }
+  & a {
+    background-color: white;
+    display:block;
+  }
+}
