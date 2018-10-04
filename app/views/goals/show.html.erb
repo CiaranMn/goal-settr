@@ -2,14 +2,11 @@
   <div class='centered-text'>
     <h1><%= @goal.name %></h1>
     <% if current_user == @goal.user %>
-      <%= link_to "(Edit goal)", edit_goal_path %>
-      <br><br>
-    <% else %>
-      <br><br>
+      <%= link_to "(edit goal)", edit_goal_path %> -
+      <%= link_to "(delete goal)", confirm_delete_path %>
     <% end %>
+    <br>
   </div>
-
-<%= link_to 'edit profile', "/users/#{@user.id}/edit" %>
 
   <table id='show-goal'>
     <tr>
@@ -97,3 +94,4 @@
       <% end %>
     </div>
   <% end %>
+  <br><br>

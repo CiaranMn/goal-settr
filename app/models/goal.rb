@@ -12,6 +12,10 @@ class Goal < ApplicationRecord
     Goal.all.select { |goal| goal.start_date <= Date.current }
   end
 
+  def self.active_goals
+    valid_goals.select { |goal| goal.status != achieved }
+  end
+
   def self.goals_due_soon # Show goals due soon (class method)
     Goal.all.select { |goal| goal.due_date < 10.days.from_now }
   end

@@ -108,6 +108,14 @@ h2 {
 
 #goals-index {
   width: 600px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.stacked {
+  display: inline;
 }
 
 #show-goal {
@@ -118,7 +126,6 @@ h2 {
 #show-goal td {
   width: 300px;
 }
-
 
 .comment-box {
   width: 600px;

@@ -2,7 +2,7 @@ class GoalsController < ApplicationController
 
   before_action :require_login
   skip_before_action :require_login, only: [:index, :show]
-  before_action :require_goal_owner, only: [:edit, :update, :destroy]
+  before_action :require_goal_owner, only: [:edit, :update, :confirm_delete, :destroy]
 
   def index
     if !params[:q]
@@ -47,9 +47,22 @@ class GoalsController < ApplicationController
     end
   end
 
+  def calendar
+
+  end
+
+  def confirm_delete
+  end
+
   def destroy
-    flash[:alert] = "Goal deleted!"
-    redirect_to @goal.user
+    if request.referrer.include? "goals/#{@goal.id}/delete"
+      @goal.destroy
+      flash[:alert] = "Goal deleted!"
+      redirect_to @goal.user
+    else
+      flash[:alert] = "Please go through the confirmation page to delete goals."
+      redirect_to @goal
+    end
   end
 
   private
