@@ -8,12 +8,14 @@ class Goal < ApplicationRecord
   has_many :commenters, through: :comments, source: :user
   has_many :daily_goal_mets
 
+  validates :name, :user_id, :start_date, :due_date, :overall_goal, :daily_goal, :category_id, presence: :true
+
   def self.valid_goals
     Goal.all.select { |goal| goal.start_date <= Date.current }
   end
 
   def self.active_goals
-    Goal.all.map(&:active?)
+    Goal.all.select(&:active?)
   end
 
   def self.goals_due_soon # Show goals due soon (class method)

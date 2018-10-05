@@ -63,7 +63,7 @@
       <td>Category</td>
       <td><%= link_to @goal.category.name, @goal.category %></td>
     </tr>
-    <% if !@goal.description.empty? %>
+    <% if @goal.description %>
       <tr>
         <td colspan="2"><%= @goal.description %></td>
       </tr>

@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :comments_given, class_name: "Comment", foreign_key: :commenter_id
   has_many :daily_goal_mets, through: :goals
 
-  # validates :name, presence: true
+  validates :name, presence: true
 
   def self.scoreboard
     ranking = User.all.sort_by { |user| yield(user) }.reverse
