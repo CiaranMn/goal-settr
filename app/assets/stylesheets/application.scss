@@ -44,7 +44,23 @@ h2 {
   justify-content: space-between;
 }
 
-/* table styling */
+.center {
+  width: 100px;
+  margin: auto;
+}
+
+.spread {
+  display: flex;
+  width: 600px;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.red-text {
+  color: rgb(221, 28, 28);
+}
+
+/* goals styling */
 
 #goals-index {
   width: 600px;
@@ -63,44 +79,15 @@ h2 {
   width: 300px;
 }
 
-#users-index {
+.overall-goals td {
+  min-width: 120px;
+}
+
+#goals-leaderboard {
   width: 600px;
 }
 
-
-/* table styling */
-
-.profile-buttons {
-  width: 630px;
-  margin: auto;
-  text-align: center;
-  line-height: 1.0;
-}
-
-#jumbotron-users {
-  padding-left: 60px;
-  padding-right: 60px;
-   border-radius: 60px;
-  margin: auto;
-}
-
-#top-categories {
-  padding-left: 60px;
-  padding-right: 60px;
-   border-radius: 60px;
-  margin: auto;
-}
-
-.user-profile-headline {
-  width: 600px;
-  margin: auto;
-}
-
-.stacked {
-  display: inline;
-  padding-bottom: 20px;
-
-}
+/* used on the goal show page */
 
 .comment-box {
   width: 600px;
@@ -115,6 +102,64 @@ h2 {
   flex-flow: row wrap;
 }
 
+.boost-btn {
+  font-size: 20px;
+  width: 60px;
+  margin-left: 10px;
+}
+
+/* user styling */
+
+#users-index {
+  width: 600px;
+}
+
+#jumbotron-users {
+  padding-left: 60px;
+  padding-right: 60px;
+   border-radius: 60px;
+  margin: auto;
+}
+
+
+#top-categories {
+  padding-left: 60px;
+  padding-right: 60px;
+   border-radius: 60px;
+  margin: auto;
+}
+
+.profile-buttons {
+  width: 630px;
+  margin: auto;
+  text-align: center;
+  line-height: 1.0;
+}
+
+.user-profile-headline {
+  width: 600px;
+  margin: auto;
+}
+
+.stacked {
+  display: inline;
+  padding-bottom: 20px;
+}
+
+.user-form {
+  width: 200px;
+  margin: auto;
+  align: center;
+}
+
+.user-edit-form {
+  width: 250px;
+  margin: auto;
+  align: center;
+}
+
+/* table styling */
+
 td, th {
   border-bottom: 1px solid teal;
   padding: 12px;
@@ -126,23 +171,12 @@ td a {
   display:block;
 }
 
-tr:hover {
+.row-hover tr:hover {
   background-color: rgb(213, 237, 226);
 }
 
-.overall-goals td {
-  min-width: 120px;
-}
-
-.center {
-  width: 100px;
-  margin: auto;
-}
-
-.boost-btn {
-  font-size: 20px;
-  width: 60px;
-  margin-left: 10px;
+.cell-hover th:hover, .cell-hover td:hover {
+  background-color: rgb(213, 237, 226);
 }
 
 /* form styling */
@@ -169,7 +203,7 @@ div[id^="flash"] {
 }
 
 .field_with_errors {
-  border: 2px solid rgb(221, 28, 28);
+  color: rgb(221, 28, 28);
 }
 
 #confirm-delete a {

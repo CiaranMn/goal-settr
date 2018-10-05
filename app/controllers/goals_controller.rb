@@ -7,8 +7,9 @@ class GoalsController < ApplicationController
   def index
     if !params[:q]
       @goals = Goal.all
+      @sort = "All goals"
     else
-      @goals = goals_sorter
+      @goals, @sort = goals_sorter
     end
   end
 
@@ -109,17 +110,23 @@ class GoalsController < ApplicationController
   def goals_sorter
     case params[:q]
       when 'name'
-        Goal.all.sort_by(&:name)
+        [Goal.order(:name), "All goals (by name)"]
       when 'user'
-        Goal.all.sort_by(&:user_name)
-      when 'percent'
-        Goal.all.sort_by(&:percentage_of_daily_goals_met).reverse
+        [Goal.all.sort_by(&:user_name), "All goals (by user)"]
+      when 'daily'
+        [Goal.all.sort_by(&:percentage_of_daily_goals_met).reverse, "All goals (by % daily goals met)"]
       when 'streak'
-        Goal.all.sort_by(&:daily_goal_streak).reverse
+        [Goal.all.sort_by(&:daily_goal_streak).reverse, "All goals (by current streak)"]
       when 'due'
-        Goal.all.sort_by(&:due_date)
+        [Goal.order(:due_date), "All goals (by due date)"]
+      when 'active'
+        [Goal.active_goals, "Active goals only"]
+      when 'achieved'
+        [Goal.goals_achieved, "Achieved goals only"]
+      when 'due_soon'
+        [Goal.goals_due_soon, "Goals due within 10 days"]
       else
-        Goal.all
+        [Goal.all, "All goals"]
     end
   end
 

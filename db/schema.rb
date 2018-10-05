@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2018_10_02_095609) do
     t.string "daily_goal"
     t.integer "category_id"
     t.integer "user_id"
-    t.boolean "achieved"
+    t.boolean "achieved", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -5,12 +5,17 @@
     <h1><%= @goal.name %>
 
     <% if Goal.record_streak == @goal %>
-      <i class="fa fa-trophy" title="All time record streak!" style="font-size: 25px;"></i>
+      <i class="fa fa-trophy" title="All time record streak!" style="font-size: 24px;"></i>
     <% end %>
 
     <% if Goal.longest_current_streak == @goal %>
       <i class="fa fa-medal" title="Longest current streak!" style="font-size: 25px;"></i>
     <% end %>
+
+    <% if @goal.achieved %>
+      <i class="fa fa-award" title="Goal achieved!" style="font-size: 25px;"></i>
+    <% end %>
+
     </h1>
 <!-- Display links to edit goal if the owner is viewing it -->
 
@@ -25,7 +30,7 @@
 
 <!-- Information on the goal -->
 
-  <table id='show-goal'>
+  <table id='show-goal' class='row-hover'>
     <tr>
       <td>User</td>
       <td><%= link_to @goal.user_name, @goal.user %></td>
@@ -33,6 +38,10 @@
     <tr>
       <td>Overall goal</td>
       <td><%= @goal.overall_goal %>
+    </tr>
+    <tr>
+      <td>Start</td>
+      <td><%= @goal.start_date.to_date %></td>
     </tr>
     <tr>
       <td>Due</td>
@@ -52,7 +61,7 @@
     </tr>
     <tr>
       <td>Category</td>
-      <td><%= @goal.category.name %></td>
+      <td><%= link_to @goal.category.name, @goal.category %></td>
     </tr>
     <% if !@goal.description.empty? %>
       <tr>

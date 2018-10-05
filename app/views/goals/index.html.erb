@@ -1,38 +1,37 @@
 
-<div id="goals-index">
-
+<div id="goals-index" class="row-hover">
 
     <div class="stacked">
       <h1>Overall Goals</h1>
       <table class="overall-goals">
         <tr>
-          <td>Total</td>
+          <td><%= link_to "Total", goals_path %></td>
           <td><%= Goal.all.count %></td>
         </tr>
         <tr>
-          <td>Active</td>
+          <td><%= link_to "Active", goals_path({q: :active}) %></td>
           <td><%= Goal.valid_goals.count %></td>
         </tr>
         <tr>
-          <td>Achieved</td>
+          <td><%= link_to "Achieved", goals_path({q: :achieved}) %></td>
           <td><%= Goal.goals_achieved.count %></td>
         </tr>
         <tr>
-          <td>Due soon</td>
+          <td><%= link_to "Due soon", goals_path({q: :due_soon}) %></td>
           <td><%= Goal.goals_due_soon.count %></td>
         </tr>
+        <% if user_signed_in? %>
         <tr>
           <td colspan="2">
             <div class='centered-text'>
-              <% if user_signed_in? %>
                 <%= link_to "Add a goal", new_goal_path %>
-              <% end %>
             </div>
           </td>
         </tr>
+        <% end %>
       </table>
     </div>
-    
+
 
     <div class="stacked">
       <h1>Daily Goals</h1>
@@ -60,25 +59,30 @@
       </table>
     </div>
 
-
   <div class="stacked">
-    <h1>Leaderboard</h1>
-    <table class="goals-leaderboard">
-      <th><%= link_to "Goal", goals_path({q: :name}) %></th>
-      <th><%= link_to "User", goals_path({q: :user}) %></th>
-      <th><%= link_to "Daily %", goals_path({q: :daily}) %></th>
-      <th><%= link_to "Streak", goals_path({q: :streak}) %></th>
-      <th><%= link_to "Due Date", goals_path({q: :due}) %></th>
 
-    <% @goals.each do |goal| %>
-      <tr>
-        <td><%= link_to goal.name, goal %></td>
-        <td><%= link_to goal.user.name, goal.user %></td>
-        <td><%= goal.percentage_of_daily_goals_met %>%</td>
-        <td><%= goal.daily_goal_streak %></td>
-        <td><%= goal.due_date.to_date %></td>
-      </a></tr>
-    <% end %>
+    <div class="spread">
+      <div><h1>Leaderboard</h1></div>
+      <div><b><%= @sort %></b></div>
+    </div>
+
+    <div>
+      <table id="goals-leaderboard">
+        <th><%= link_to "Goal", goals_path({q: :name}) %></th>
+        <th><%= link_to "User", goals_path({q: :user}) %></th>
+        <th><%= link_to "Daily %", goals_path({q: :daily}) %></th>
+        <th><%= link_to "Streak", goals_path({q: :streak}) %></th>
+        <th><%= link_to "Due Date", goals_path({q: :due}) %></th>
+
+      <% @goals.each do |goal| %>
+        <tr>
+          <td><%= link_to goal.name, goal %></td>
+          <td><%= link_to goal.user.name, goal.user %></td>
+          <td><%= goal.percentage_of_daily_goals_met %>%</td>
+          <td><%= goal.daily_goal_streak %></td>
+          <td><%= goal.due_date.to_date %></td>
+        </a></tr>
+      <% end %>
+    </div>
   </div>
-
 </div>

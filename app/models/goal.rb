@@ -13,7 +13,7 @@ class Goal < ApplicationRecord
   end
 
   def self.active_goals
-    valid_goals.select { |goal| goal.status != achieved }
+    valid_goals.select { |goal| goal.achieved != true }
   end
 
   def self.goals_due_soon # Show goals due soon (class method)
@@ -21,7 +21,7 @@ class Goal < ApplicationRecord
   end
 
   def self.goals_achieved
-    Goal.all.select { |goal| goal.achieved == true }
+    Goal.where(achieved: true)
   end
 
   def self.num_daily_goals_met_yesterday #number of daily goals met today

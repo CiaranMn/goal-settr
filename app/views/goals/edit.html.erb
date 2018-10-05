@@ -52,6 +52,11 @@
     <%= f.text_area :description, cols: 40, class: "form-control"  %>
   </div>
 
+  <div class="form-group">
+    <%= f.label :achieved, "Overall goal achieved?" %>
+    <%= f.check_box :achieved %>
+  </div>
+
     <%= f.submit %>
 
   <% end %>

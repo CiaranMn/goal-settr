@@ -5,7 +5,7 @@ class Calendar
   def initialize(date)
     @date = date
   end
-
+  
   # we need this for generating the calendar in the goals calendar view
 
   def cal_array

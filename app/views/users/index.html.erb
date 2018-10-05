@@ -18,20 +18,20 @@
 
 
 <h1>Recently active users</h1>
-<table>
+<table class="cell-hover">
 
 <% @latest_users.each do |user| %>
-<th><div class="card-group">
+<div class="card-group">
   <div class="card">
-    <div class="card-body">
+    <div class="card-body"><th>
       <h3 class="card-title"><%= link_to user.name, user%></h3>
       <% if !user.goals.empty? %>
         <p class="card-text"><small class="text-muted">Goal: <%= link_to user.goals.last.name, user.goals.last %></small></p>
         <p class="card-text"><small class="text-muted"> <%= user.goals.last.overall_goal%></small></p>
       <p class="card-text"><small class="text-muted"><%=user.name%> has met <%= user.daily_goal_mets.count%> daily goals!</small></p>
       <%end%>
-    </div>
-  </div></th>
+    </th></div>
+  </div>
  <% end %>
 
 </table>
