@@ -64,8 +64,8 @@ class Goal < ApplicationRecord
     if days_since_goal_began <= 0
       return 0
     else
-      count = ((self.daily_goal_mets.count.to_f / days_since_goal_began)*100).to_i
-      [count,100].min
+      count = ((self.daily_goal_mets.count.to_f / days_since_goal_began)*100).to_f
+      [count,100.0].min.round(1)
     end
   end
 

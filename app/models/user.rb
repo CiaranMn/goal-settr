@@ -90,7 +90,7 @@ class User < ApplicationRecord
   end
 
   def percent_daily_goal_mets
-    return 0 if goals.empty?
+    return 0 if daily_goal_mets.empty?
     active_goals.map(&:percentage_of_daily_goals_met).inject(0, :+).to_f / active_goals.count.to_f
   end
 
