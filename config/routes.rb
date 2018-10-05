@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   root 'users#index'
 
-  resources :category, only: [:show, :index]
+  resources :category
 
   get '/goals/:id/delete', to: 'goals#confirm_delete', as: 'confirm_delete'
 
