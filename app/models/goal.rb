@@ -13,7 +13,7 @@ class Goal < ApplicationRecord
   end
 
   def self.active_goals
-    valid_goals.select { |goal| goal.achieved != true }
+    Goal.all.map(&:active?)
   end
 
   def self.goals_due_soon # Show goals due soon (class method)
@@ -49,8 +49,8 @@ class Goal < ApplicationRecord
     (percentage_total.to_f / valid_goals.count.to_f).to_i
   end
 
-  def valid_goals
-    self.goals.select { |goal| goal.start_date <= Date.current }
+  def active?
+    start_date <= Date.current && achieved != true
   end
 
   def days_to_goal_due_date #Time to goal due date (instance method)
@@ -62,7 +62,8 @@ class Goal < ApplicationRecord
     if days_since_goal_began <= 0
       return 0
     else
-      ((self.daily_goal_mets.count.to_f / days_since_goal_began)*100).to_i
+      count = ((self.daily_goal_mets.count.to_f / days_since_goal_began)*100).to_i
+      [count,100].min
     end
   end
 

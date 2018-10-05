@@ -1,0 +1,23 @@
+<% if Goal.record_streak.user == @user %>
+  <i class="fa fa-trophy" title="All time record streak!" style="font-size: 25px;"></i>
+<% end %>
+
+<% if Goal.longest_current_streak.user == @user %>
+  <i class="fa fa-medal" title="Longest current streak!" style="font-size: 25px;"></i>
+<% end %>
+
+<% @user.goals_achieved.each do |goal| %>
+  <i class="fa fa-award" title="Goal achieved!" style="font-size: 25px;"></i>
+<% end %>
+
+<% if User.most_supportive == @user %>
+  <i class="far fa-thumbs-up" title="Most supportive user!" style="font-size: 25px;"></i>
+<% end %>
+
+<% if User.most_talkative == @user %>
+  <i class="fas fa-comment" title="Most talkative user!" style="font-size: 25px;"></i>
+<% end %>
+
+<% if User.most_consistent == @user %>
+  <i class="far fa-smile" title="Best daily goal %!" style="font-size: 25px;"></i>
+<% end %>

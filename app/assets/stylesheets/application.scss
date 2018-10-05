@@ -110,8 +110,12 @@ h2 {
 
 /* user styling */
 
-#users-index {
+.users-index {
   width: 600px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 #jumbotron-users {
@@ -134,11 +138,6 @@ h2 {
   margin: auto;
   text-align: center;
   line-height: 1.0;
-}
-
-.user-profile-headline {
-  width: 600px;
-  margin: auto;
 }
 
 .stacked {

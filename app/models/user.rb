@@ -20,17 +20,9 @@ class User < ApplicationRecord
     end
   end
 
-  def current_user
-  @current_user ||= User.find(session[:user_id]) if session[:user_id]
-end
-
   def newest_goal
     self.try(:goals).first.name
   end
-
-  # def newest_goal_description
-  #   newest_goal.description
-  # end
 
   def self.boosts_given_scoreboard
     scoreboard(&:num_boosts_given)
@@ -81,8 +73,11 @@ end
   end
 
   def goals_achieved
-    # needs to call on goals for total
     goals.select { |goal| goal.achieved == true }
+  end
+
+  def goals_achieved_count
+    goals_achieved.count
   end
 
   def daily_goal_mets_count
@@ -90,9 +85,13 @@ end
     goals.map { |goal| goal.daily_goal_mets.count }.inject(0, :+)
   end
 
+  def active_goals
+    goals.select(&:active?)
+  end
+
   def percent_daily_goal_mets
     return 0 if goals.empty?
-    goals.map(&:percentage_of_daily_goals_met).inject(0, :+).to_f / goals.count.to_f
+    active_goals.map(&:percentage_of_daily_goals_met).inject(0, :+).to_f / active_goals.count.to_f
   end
 
   def unique_commenters
