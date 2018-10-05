@@ -15,7 +15,8 @@
 
 <!-- The form -->
 
-<!-- The each_with_index loop generates the grid for the calendar, displaying checkboxes according to the appropriate days in the month, and checks ones for which a daily goal has already been logged as being met -->
+<!-- The each_with_index loop generates the grid for the calendar, displaying checkboxes according to where dates are present in the array the controller passes in, and checking ones for which a daily goal has already been logged as met. Checkboxes which are after today or before the goal's start date are disabled -->
+
 <%= form_for @goal, url: { controller: :goals, action: :calendar_update, method: :patch } do |f| %>
 
   <div id="calendar">
@@ -36,7 +37,7 @@
         <% end %>
         </td>
         <% if (index + 1) % 7 == 0 %>
-          </tr></tr>
+          </tr><tr>
         <% end %>
       <% end %>
     </tr>
