@@ -2,7 +2,13 @@
 
   <div class="jumbotron jumbotron-fluid" id="jumbotron-users">
     <h1 class="display-4">boost! your life</h1>
+
+    <%if user_signed_in?%>
+    <p class="lead">Welcome back, <%=current_user.name%>! Do you want to <%=link_to 'log a daily goal?', current_user%> </p>
+    <%else%>
     <p class="lead">Ready to commit to your goals and support your friends? <%=link_to 'Sign up today!', new_user_registration_path%></p>
+    <%end%>
+    <p class="lead">Take a look at the <%=link_to 'goal dashboard!', goals_path%></p>
     <hr class="my-4">
     <p>A friendly community of <%=@users.count %> users, established 2018</p>
   </div>
