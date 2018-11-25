@@ -14,7 +14,11 @@
 - The goal dashboard shows stats on goals and allows them to be sorted by various measures.
 
 ## Structure
-#### Ruby on Rails in a classic MVC pattern. Devise is used for user authentification.
+#### Ruby on Rails in a classic MVC pattern. Devise is used for user authentification. SQLite database.
+
+to start:
+`rails db:migrate`, `rails db:seed`, `rails s`
+
 ### Controllers
 - **boosts**: for when users want to add 'boosts' (likes/hearts/stars) to other users' goals
 - **categories**: displays goals in a category and sorts category by number of goals or name 
